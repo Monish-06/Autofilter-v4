@@ -105,6 +105,9 @@ class Bot(Client):
                 current += 1
 import asyncio
 from aiohttp import web
+import os
+environ = os.environ
+
 
 async def health(request):
     return web.Response(text="Bot is alive!")
