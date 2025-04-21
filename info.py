@@ -54,7 +54,7 @@ FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), True)
-START_MESSAGE = environ.get('START_MESSAGE', script.START_TXT)
+START_MESSAGE = environ.get('START_MESSAGE', Script.START_TXT)
 
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
