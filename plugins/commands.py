@@ -67,7 +67,7 @@ async def start(client, message):
         await asyncio.sleep(2)
         await message.reply_photo(
             photo=random.choice(PICS),
-            caption=START_MESSAGE.format(user=message.from_user.mention, bot=client.mention),
+            caption = START_MESSAGE.format(user=message.from_user.mention, bot=f"@{client.username}"),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=enums.ParseMode.HTML
         )
