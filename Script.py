@@ -12,7 +12,7 @@ def is_enabled(value, default):
 
 class script(object):
     HOME_BUTTONURL_UPDATES = environ.get("HOME_BUTTONURL_UPDATES", '')
-    START_TXT = environ.get("START_TXT", "<b>Hello {}, your username is <code>{}</code> and I'm <code>{}</code>. Let's get started!</b>")
+    START_TXT = environ.get("START_TXT", "<b>Hello {}, I'm <code>{}</code>. Let's get started!</b>")
     
     HELP_TXT = """𝙷𝙴𝚈 {}
 𝙷𝙴𝚁𝙴 𝙸𝚂 𝙼𝚈 𝙷𝙴𝙻𝙿 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂."""
