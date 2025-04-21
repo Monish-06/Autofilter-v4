@@ -58,7 +58,7 @@ async def start(client, message):
             InlineKeyboardButton("ʀᴇǫᴜᴇsᴛ ᴍᴏᴠɪᴇs ʜᴇʀᴇ", url="https://t.me/moxi_movies_grp")
         ],[
             InlineKeyboardButton("Sᴇᴀʀᴄʜ 🔎", switch_inline_query_current_chat=''),
-            InlineKeyboardButton("Cʜᴀɴɴᴇʟ 🔈", url="https://t.me/mkn_bots_updates")
+            InlineKeyboardButton("Cʜᴀɴɴᴇʟ 🔈", url="https://t.me/moxi_movies")
         ],[
             InlineKeyboardButton("Hᴇʟᴩ 🕸️", callback_data="help"),
             InlineKeyboardButton("Aʙᴏᴜᴛ ✨", callback_data="about")
