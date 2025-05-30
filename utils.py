@@ -378,16 +378,26 @@ def humanbytes(size):
         n += 1
     return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
 
-import base64
-
 async def get_shortlink(link):
-    try:
-        # Encode the original link to Base64
-        encoded_link = base64.urlsafe_b64encode(link.encode()).decode()
+    https = link.split(":")[0]
+    if "http" == https:
+        https = "https"
+        link = link.replace("http", https)
+    url = f'https://GreyMattersLinks.in/api'
+    params = {'api': URL_SHORTNER_WEBSITE_API,
+              'url': link,
+              }
 
-        # Construct the safelink URL with the encoded link
-        safelink_url = f"https://moxibeatz.fun/p/1.html?url={encoded_link}"
-        return safelink_url
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
+                data = await response.json()
+                if data["status"] == "success":
+                    return data['shortenedUrl']
+                else:
+                    logger.error(f"Error: {data['message']}")
+                    return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
+
     except Exception as e:
-        logger.error(f"Safelink generation error: {e}")
-        return link
+        logger.error(e)
+        return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
