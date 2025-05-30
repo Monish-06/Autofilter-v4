@@ -378,26 +378,32 @@ def humanbytes(size):
         n += 1
     return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
 
-async def get_shortlink(link):
-    https = link.split(":")[0]
-    if "http" == https:
-        https = "https"
-        link = link.replace("http", https)
-    url = f'https://GreyMattersLinks.in/api'
-    params = {'api': URL_SHORTNER_WEBSITE_API,
-              'url': link,
-              }
+
+from urllib.parse import quote
+import aiohttp
+import logging
+
+logger = logging.getLogger(__name__)
+
+async def get_shortlink(link: str) -> str:
+    encoded_link = quote(link, safe='')
+    api_url = 'https://adrinolinks.in/api'
+    params = {
+        'api': URL_SHORTENER_WEBSITE_API,
+        'url': encoded_link
+    }
 
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
+            async with session.get(api_url, params=params, raise_for_status=True, ssl=False) as response:
                 data = await response.json()
-                if data["status"] == "success":
-                    return data['shortenedUrl']
+                if data.get("status") == "success":
+                    return data.get("shortenedUrl")
                 else:
-                    logger.error(f"Error: {data['message']}")
-                    return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
-
+                    logger.error(f"API Error: {data.get('message')}")
     except Exception as e:
-        logger.error(e)
-        return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
+        logger.error(f"Exception in get_shortlink: {e}")
+
+    return link
+
+
